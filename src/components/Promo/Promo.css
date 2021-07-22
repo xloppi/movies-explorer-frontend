@@ -1,0 +1,12 @@
+.promo {
+  background-color: #073042;
+  color: #FFFFFF;
+}
+.promo__link {
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #FFFFFF;
+  opacity: 0.6;
+  border-radius: 3px;
+  padding: 10px 20px;
+}
