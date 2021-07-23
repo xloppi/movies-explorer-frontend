@@ -5,11 +5,13 @@ import './Header.css';
 function Header() {
     return (
       <header className="header">
-        <img className="header__logo" src={logo} alt="логотип" />
-        <ul className="header__nav">
-            <button>Регистрация</button>
-            <button>Войти</button>
-        </ul>
+        <div className="header__container">
+          <img className="header__logo" src={logo} alt="логотип" />
+          <ul className="header__nav">
+              <a className="header__btn-signup" href="#">Регистрация</a>
+              <a className="header__btn-signin" href="#">Войти</a>
+          </ul>
+        </div>
       </header>
     );
 }
