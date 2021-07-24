@@ -1,3 +1,7 @@
+.header {
+  background-color: #073042;
+}
+
 .header__container {
   max-width: 1140px;
   display: flex;
