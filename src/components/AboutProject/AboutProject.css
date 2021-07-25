@@ -1,19 +1,6 @@
-.about-project {
-
-}
-
 .about-project__container {
   max-width: 1140px;
   margin: 0 auto;
-}
-
-.about-project__title {
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 27px;
-  border-bottom: solid 1px;
-  padding-bottom: 20px;
-  margin: 110px 0 70px;
 }
 
 .about-project__description {

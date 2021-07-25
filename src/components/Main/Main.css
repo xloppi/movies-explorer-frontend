@@ -1,3 +1,8 @@
-.main {
-
+.main__section-title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  border-bottom: solid 1px;
+  padding: 110px 0 20px;
+  margin: 0 0 70px;
 }
