@@ -1,4 +1,5 @@
 import "./AboutMe.css";
+import Portfolio from '../Portfolio/Portfolio';
 import me_photo from '../../images/me.jpg';
 
 function AboutMe() {
@@ -18,6 +19,7 @@ function AboutMe() {
           </div>
           <img className="about-me__photo" src={me_photo} alt="фото"></img>
         </div>
+        <Portfolio />
       </div>
     </section>
   );
