@@ -1,0 +1,38 @@
+.movies-card__image {
+  width: 360px;
+  height: 201px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 0 0 14px;
+}
+
+.movies-card__description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 332px;
+  margin: 0 auto;
+}
+
+.movies-card__title {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0;
+}
+
+.movies-card__time-container {
+  display: flex;
+  width: 52px;
+  height: 18px;
+  color: #A0A0A0;
+  background-color: #F9F9F9;
+  border-radius: 3px;
+
+}
+
+.movies-card__time {
+  font-size: 11px;
+  line-height: 10px;
+  margin: auto;
+}
