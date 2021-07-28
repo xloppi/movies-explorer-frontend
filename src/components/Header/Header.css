@@ -1,5 +1,6 @@
 .header {
   background-color: #073042;
+  flex: 0 1 auto;
 }
 
 .header__container {
