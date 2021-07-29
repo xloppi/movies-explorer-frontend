@@ -7,12 +7,12 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   return (
     <div className="app">
-      <Header />
-      <Profile />
+      <NotFound />
     </div>
   );
 }
