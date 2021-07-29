@@ -1,12 +1,12 @@
-import './Movies.css';
+import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoreButton from "../MoreButton/MoreButton";
 
-function Movies() {
+function SavedMovies() {
     return (
-      <main className="movies">
-        <div className="movies__container">
+      <main className="saved-movies">
+        <div className="saved-movies__container">
         <SearchForm />
         <MoviesCardList />
         <MoreButton />
@@ -15,4 +15,4 @@ function Movies() {
     );
 }
 
-export default Movies;
+export default SavedMovies;

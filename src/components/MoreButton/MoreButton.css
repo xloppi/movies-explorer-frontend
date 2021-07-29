@@ -1,0 +1,19 @@
+.more-button {
+  margin: 0 auto;
+  padding: 50px 0 80px;
+}
+
+.more-button__button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: #ffffff;
+  width: 320px;
+  height: 36px;
+  border: solid 1px #E8E8E8;
+  border-radius: 5px;
+  padding: 10px 60px;
+}

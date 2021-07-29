@@ -1,3 +1,32 @@
+.movies-card {
+  position: relative;
+}
+
+.movies-card__button-save {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #F9F9F9;
+  border: 0;
+  border-radius: 30px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 72px;
+  height: 21px;
+  font-size: 10px;
+  line-height: 9px;
+}
+
+.movies-card__button-saved {
+  background-color: #FF3055;
+  background-image: url(../../images/saved_card.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 0;
+  width: 21px;
+}
+
 .movies-card__image {
   width: 360px;
   height: 201px;
