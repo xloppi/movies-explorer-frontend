@@ -12,7 +12,7 @@ import NotFound from "../NotFound/NotFound";
 function App() {
   return (
     <div className="app">
-      <NotFound />
+      <Header />
     </div>
   );
 }

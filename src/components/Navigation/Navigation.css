@@ -1,0 +1,12 @@
+.navigation__link-signup {
+  margin: 0 50px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.navigation__link-signin {
+  text-decoration: none;
+  color: #000000;
+  background-color: #2BE080;
+  border-radius: 3px;
+  padding: 8px 20px;
+}
