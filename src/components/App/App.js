@@ -5,12 +5,14 @@ import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
-
+import Login from "../Login/Login";
+import Profile from "../Profile/Profile";
 
 function App() {
   return (
     <div className="app">
-      <Register />
+      <Header />
+      <Profile />
     </div>
   );
 }

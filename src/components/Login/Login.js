@@ -1,13 +1,13 @@
 import './Login.css';
 import logo from '../../images/logo.svg';
 
-function login() {
+function Login() {
   return (
     <section className="login">
       <div className="login__container">
         <div className="login__header-container">
           <img className="login__header-image" src={logo} />
-          <h2 className="login__header">Добро пожаловать!</h2>
+          <h2 className="login__header">Рады видеть!</h2>
         </div>
         <form className="login__form">
           <fieldset className="login__form-fieldset">
@@ -30,12 +30,12 @@ function login() {
             />
             <span className="login__form-input-error"></span>
           </fieldset>
-          <button className="login__form-button-submit" type="button">Зарегистрироваться</button>
+          <button className="login__form-button-submit" type="button">Войти</button>
         </form>
         <div className="login__navigation">
-          <p className="login__navigation-title">Уже зарегистрированы?</p>
+          <p className="login__navigation-title">Ещё не зарегистрированы?</p>
           <a className="login__navigation-link" href="#">
-            Войти
+            Регистрация
           </a>
         </div>
       </div>
@@ -43,4 +43,4 @@ function login() {
   );
 }
 
-export default Register;
+export default Login;
