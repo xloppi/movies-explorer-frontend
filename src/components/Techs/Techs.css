@@ -38,7 +38,8 @@
 
 .techs__list-item {
   background-color: #E8E8E8;
-  padding: 21px 31px;
+  width: 90px;
+  height: 60px;
   margin-right: 10px;
   border-radius: 10px;
 }
