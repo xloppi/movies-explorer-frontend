@@ -1,12 +1,19 @@
 .movies-card-list {
   padding: 70px 0 28px;
+  max-width: 100%;
+}
+
+.movies-card-list__container {
+
 }
 
 .movies-card-list__list {
   list-style-type: none;
-  padding: 0;
-  margin: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 60px 30px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  max-width: 100%;
 }

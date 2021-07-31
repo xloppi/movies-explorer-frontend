@@ -3,6 +3,10 @@
   flex: 0 1 auto;
 }
 
+.header_theme_azure-black {
+  background-color: #073042;
+}
+
 .header__container {
   max-width: 1140px;
   display: flex;

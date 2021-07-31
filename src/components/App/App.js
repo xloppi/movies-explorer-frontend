@@ -9,14 +9,26 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import { useEffect, useState } from 'react';
+import { Route, Switch, Redirect, useHistory, useLocation } from 'react-router-dom';
 
 function App() {
+  const { pathname } = useLocation();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const history = useHistory();
 
   return (
     <div className="app">
-      <Header isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
-
+      <Header {...{pathname, isMenuOpen, setMenuOpen, loggedIn}} />
+      <Switch>
+        <Route path="/" exact>
+          <Main />
+        </Route>
+      </Switch>
+      <Route path="/movies" exact>
+        <Movies />
+      </Route>
+      <Footer />
     </div>
   );
 }
