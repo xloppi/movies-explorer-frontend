@@ -35,6 +35,10 @@
   line-height: 18px;
 }
 
+.navigation__link-main-page {
+  display: none;
+}
+
 .navigation__link_type_bold {
   font-weight: 500;
 }
@@ -45,7 +49,7 @@
   margin: 0 7px 0 0;
 }
 
-.navigation__link-account {
+.navigation__link-account-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,37 +61,101 @@
 
 }
 
-.navigation__burger-icon {
+.navigation__burger-button {
+  background-color: initial;
   position: relative;
   display: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
   width: 28px;
   height: 23px;
   box-sizing: border-box;
 }
 
-.navigation__burger-icon-span {
+.navigation__burger-button-span {
   background-color: #000000;
   position: absolute;
   width: 100%;
   height: 3px;
   top: calc(50% - 1.5px);
+  left: 0px;
 }
 
-.navigation__burger-icon-span:first-child {
+.navigation__burger-button-span:first-child {
   top: 0;
 }
 
-.navigation__burger-icon-span:last-child {
+.navigation__burger-button-span:last-child {
   top: auto;
   bottom: 0;
 }
 
 @media screen and (max-width: 768px) {
-  .navigation__burger-icon {
+  .navigation__burger-button {
     display: block;
   }
 
   .navigation__links {
-    display: none;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s linear;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
+
+  .navigation__link {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .navigation__link:hover {
+    border-bottom: solid 2px;
+  }
+  .navigation__link-account {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .navigation__link-main-page {
+    display: inline;
+  }
+  .navigation__container {
+    background-color: #FFFFFF;
+    position: absolute;
+    right: -100%;
+    top: 0;
+    transition: right 0.2s linear;
+    width: calc((520/768)*100%);
+    height: 100%;
+  }
+  .navigation__list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 160px 0 90px 0;
+    box-sizing: border-box;
+  }
+  .navigation__burger-button {
+    z-index: 1;
+  }
+  .navigation__item {
+    margin: 0 0 28px 0;
+  }
+  .navigation__item:last-child {
+    margin: 0;
+    margin-top: auto;
+  }
+}
+
+.navigation__links_active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.navigation__container_active {
+  right: 0%;
 }
