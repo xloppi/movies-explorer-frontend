@@ -7,7 +7,7 @@ function MoviesCard() {
         <img className="movies-card__image" src={cardImage} />
         <button className="movies-card__button-save">Сохранить</button>
         <div className="movies-card__description">
-          <h2 className="movies-card__title">33 слова о дизайне</h2>
+          <h2 className="movies-card__title">33 слова о дизайне11111111111111111111111111111111111111111111</h2>
           <div className="movies-card__time-container">
             <p className="movies-card__time">1ч 17м</p>
           </div>

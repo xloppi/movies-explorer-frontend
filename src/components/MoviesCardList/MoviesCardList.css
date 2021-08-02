@@ -3,10 +3,6 @@
   max-width: 100%;
 }
 
-.movies-card-list__container {
-
-}
-
 .movies-card-list__list {
   list-style-type: none;
   display: grid;
@@ -16,4 +12,10 @@
   margin: 0;
   box-sizing: border-box;
   max-width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .movies-card-list__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

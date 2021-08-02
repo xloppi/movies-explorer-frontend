@@ -32,3 +32,13 @@
   line-height: 50px;
   margin: 20px 0;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding-bottom: 90px;
+  }
+
+  .portfolio__list-item-title {
+    font-size: 28px;
+  }
+}

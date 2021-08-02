@@ -24,10 +24,15 @@ function App() {
         <Route path="/" exact>
           <Main />
         </Route>
+
+        <Route path="/movies" exact>
+          <Movies />
+        </Route>
+
+        <Route path="/saved-movies" exact>
+          <SavedMovies />
+        </Route>
       </Switch>
-      <Route path="/movies" exact>
-        <Movies />
-      </Route>
       <Footer />
     </div>
   );

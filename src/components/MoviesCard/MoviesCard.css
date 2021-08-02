@@ -50,21 +50,27 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
+  max-width: 250px;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movies-card__time-container {
+  flex: 0 0 auto;
   display: flex;
   width: 52px;
   height: 18px;
   color: #A0A0A0;
   background-color: #F9F9F9;
   border-radius: 3px;
-
 }
 
 .movies-card__time {
+  width: 100%;
   font-size: 11px;
   line-height: 10px;
   margin: auto;
+  text-align: center;
 }

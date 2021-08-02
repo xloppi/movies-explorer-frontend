@@ -24,7 +24,7 @@ function Navigation({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
           </button>
           <nav className={`navigation__links ${isMenuOpen && 'navigation__links_active'}`}>
             <div className={`navigation__container ${isMenuOpen && 'navigation__container_active'}`}>
-              <ul className="navigation__list">
+              <ul className="navigation__list navigation__list-logged-in">
                 <li className="navigation__item"><a className="navigation__link navigation__link-main-page" href="#">Главная</a></li>
                 <li className="navigation__item"><a className="navigation__link navigation__link_type_bold" href="#">Фильмы</a></li>
                 <li className="navigation__item"><a className="navigation__link" href="#">Сохранённые фильмы</a></li>
@@ -37,8 +37,8 @@ function Navigation({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
           </nav>
         </>
       ) : (
-        <nav className="navigation__links">
-          <ul className="navigation__list">
+        <nav className="navigation__links-main-page">
+          <ul className="navigation__list navigation__list-main-page">
             <a className="navigation__link-signup" href="#">Регистрация</a>
             <a className="navigation__link-signin" href="#">Войти</a>
           </ul>
