@@ -18,9 +18,10 @@
   height: 21px;
   font-size: 10px;
   line-height: 9px;
+  transition: all 0.1s;
 }
 
-.movies-card__button-saved {
+.movies-card__button-save-active {
   background-color: #FF3055;
   background-image: url(../../images/saved_card.svg);
   background-repeat: no-repeat;

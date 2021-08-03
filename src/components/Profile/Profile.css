@@ -10,7 +10,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  margin: 74px 0 107px;
+  margin: 74px 0 123px;
 }
 
 .profile__form {
@@ -67,4 +67,14 @@
   font-size: 13px;
   line-height: 16px;
   border: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__title {
+    margin: 236px 0 96px;
+  }
+
+  .profile__form-button-submit {
+    margin: 210px 0 16px;
+  }
 }

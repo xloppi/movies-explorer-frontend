@@ -19,21 +19,35 @@ function App() {
 
   return (
     <div className="app">
-      <Header {...{pathname, isMenuOpen, setMenuOpen, loggedIn}} />
       <Switch>
         <Route path="/" exact>
-          <Main />
+          <Main {...{pathname, isMenuOpen, setMenuOpen, loggedIn}}/>
         </Route>
 
         <Route path="/movies" exact>
-          <Movies />
+          <Movies {...{pathname, isMenuOpen, setMenuOpen, loggedIn}}/>
         </Route>
 
         <Route path="/saved-movies" exact>
-          <SavedMovies />
+          <SavedMovies {...{pathname, isMenuOpen, setMenuOpen, loggedIn}}/>
+        </Route>
+
+        <Route path="/profile" exact>
+          <Profile {...{pathname, isMenuOpen, setMenuOpen, loggedIn}}/>
+        </Route>
+
+        <Route path="/signin" exact>
+          <Login />
+        </Route>
+
+        <Route path="/signup" exact>
+          <Register />
+        </Route>
+
+        <Route path="*">
+          <NotFound />
         </Route>
       </Switch>
-      <Footer />
     </div>
   );
 }

@@ -5,4 +5,5 @@
 .saved-movies__container {
   max-width: 1140px;
   margin: 0 auto;
+  padding: 0 30px 0;
 }

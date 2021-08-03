@@ -17,10 +17,14 @@ function Navigation({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
       {/* Временное решение чтобы проверить как работают пути */}
       { (loggedIn || pathname !== '/') ? (
         <>
-          <button className="navigation__burger-button" type="button" onClick={buttonClick}>
-            <span className="navigation__burger-button-span"></span>
-            <span className="navigation__burger-button-span"></span>
-            <span className="navigation__burger-button-span"></span>
+          <button
+            className={`navigation__burger-button`}
+            type="button"
+            onClick={buttonClick}
+          >
+            <span className={`navigation__burger-button-span ${isMenuOpen && 'navigation__burger-button-span-active'}`}></span>
+            <span className={`navigation__burger-button-span ${isMenuOpen && 'navigation__burger-button-span-active'}`}></span>
+            <span className={`navigation__burger-button-span ${isMenuOpen && 'navigation__burger-button-span-active'}`}></span>
           </button>
           <nav className={`navigation__links ${isMenuOpen && 'navigation__links_active'}`}>
             <div className={`navigation__container ${isMenuOpen && 'navigation__container_active'}`}>

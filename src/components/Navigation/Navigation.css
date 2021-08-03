@@ -1,10 +1,16 @@
 .navigation__link-signup {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
   margin: 0 50px;
   text-decoration: none;
   color: #FFFFFF;
 }
 .navigation__link-signin {
   text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
   color: #000000;
   background-color: #2BE080;
   border-radius: 3px;
@@ -25,6 +31,10 @@
 
 .navigation__item:last-child {
   margin: 0 0 0 30px;
+}
+
+.navigation__links {
+  z-index: 1;
 }
 
 .navigation__link {
@@ -80,6 +90,7 @@
   height: 3px;
   top: calc(50% - 1.5px);
   left: 0px;
+  transition: all 0.5s;
 }
 
 .navigation__burger-button-span:first-child {
@@ -140,7 +151,7 @@
     box-sizing: border-box;
   }
   .navigation__burger-button {
-    z-index: 1;
+    z-index: 2;
   }
   .navigation__item {
     margin: 0 0 28px 0;
@@ -151,6 +162,16 @@
   }
 }
 
+@media screen and (max-width: 320px) {
+  .navigation__link-signup {
+    font-size: 10px;
+    margin: 0 14px 0 0;
+  }
+  .navigation__link-signin {
+    font-size: 10px;
+  }
+}
+
 .navigation__links_active {
   visibility: visible;
   opacity: 1;
@@ -158,4 +179,20 @@
 
 .navigation__container_active {
   right: 0%;
+}
+
+.navigation__burger-button-span-active {
+  display: none;
+}
+
+.navigation__burger-button-span-active:first-child {
+  display: inline;
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+.navigation__burger-button-span-active:last-child {
+  display: inline;
+  transform: rotate(-45deg);
+  bottom: 10px;
 }
