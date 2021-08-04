@@ -40,6 +40,12 @@
   border-radius: 5px;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.search-form__form-button:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 320px) {

@@ -47,6 +47,10 @@
   line-height: 16px;
 }
 
+.footer__link:hover {
+  opacity: 0.7;
+}
+
 .footer__copyrigth {
   color: #A0A0A0;
   margin: 0;

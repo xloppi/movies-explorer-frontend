@@ -59,6 +59,12 @@
   line-height: 16px;
   border: 0;
   margin: 220px 0 16px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.profile__form-button-submit:hover {
+  opacity: 0.8;
 }
 
 .profile__button-exit {
@@ -68,6 +74,12 @@
   font-size: 13px;
   line-height: 16px;
   border: 0;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.profile__button-exit:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 768px) {

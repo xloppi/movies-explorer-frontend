@@ -68,6 +68,22 @@
   }
 }
 
+@media screen and (max-width: 700px) {
+  .techs__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 50%;
+    margin: 0 0 70px;
+  }
+
+  .techs__title {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 20px 0 24px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .techs {
     background-color: #FFFFFF;
@@ -75,12 +91,6 @@
 
   .techs__container {
     padding: 0 18px 0;
-  }
-
-  .techs__title {
-    font-size: 30px;
-    line-height: 36px;
-    margin: 20px 0 24px;
   }
 
   .techs__text {
