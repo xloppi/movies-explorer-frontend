@@ -1,4 +1,5 @@
 import './Login.css';
+import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 
 function Login() {
@@ -6,7 +7,7 @@ function Login() {
     <div className="login">
       <div className="login__container">
         <header className="login__header-container">
-          <img className="login__header-image" src={logo} />
+          <img className="login__header-image" src={logo} alt="логотип"/>
           <h1 className="login__header-title">Рады видеть!</h1>
         </header>
         <main className="login__content">
@@ -35,9 +36,9 @@ function Login() {
           </form>
           <div className="login__navigation">
             <p className="login__navigation-title">Ещё не зарегистрированы?</p>
-            <a className="login__navigation-link" href="#">
+            <Link className="login__navigation-link" to="/signup">
               Регистрация
-            </a>
+            </Link>
           </div>
         </main>
       </div>

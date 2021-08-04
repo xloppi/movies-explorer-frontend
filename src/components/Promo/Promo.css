@@ -26,15 +26,6 @@
   margin: 0 0 146px 0;
 }
 
-.promo__link {
-  text-decoration: none;
-  color: #FFFFFF;
-  display: inline-block;
-  border: 1px solid rgba(255, 255, 255, .5);
-  border-radius: 3px;
-  padding: 10px 20px;
-}
-
 .promo__logo {
   width: 310px;
   height: 304px;

@@ -22,6 +22,7 @@
 .portfolio__list-item-link {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-decoration: none;
   color: black;
 }
@@ -31,6 +32,11 @@
   font-size: 30px;
   line-height: 50px;
   margin: 20px 0;
+}
+
+.portfolio__list-item-img {
+  width: 16px;
+  height: 16px;
 }
 
 @media screen and (max-width: 768px) {
@@ -47,5 +53,19 @@
   .portfolio__title {
     font-size: 14px;
     line-height: 20px;
+  }
+
+  .portfolio__list-item-title {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__list-item-img {
+    width: 11px;
+    height: 11px;
+  }
+
+  .portfolio {
+    padding-bottom: 90px;
   }
 }

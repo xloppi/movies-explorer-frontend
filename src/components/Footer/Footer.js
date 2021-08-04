@@ -9,13 +9,13 @@ function Footer() {
           <p className="footer__copyrigth">&copy; {new Date().getFullYear()}</p>
           <ul className="footer__list">
             <li className="footer__link-container">
-              <a className="footer__link" href="#">Яндекс.Практикум</a>
+              <a className="footer__link" href="https://praktikum.yandex.ru">Яндекс.Практикум</a>
             </li>
             <li className="footer__link-container">
-              <a className="footer__link" href="#">Github</a>
+              <a className="footer__link" href="https://github.com/">Github</a>
             </li>
             <li className="footer__link-container">
-              <a className="footer__link" href="#">Facebook</a>
+              <a className="footer__link" href="https://vk.com">VK</a>
             </li>
           </ul>
         </div>

@@ -1,6 +1,6 @@
 import './Navigation.css';
 import account from '../../images/account-icon.svg';
-import { Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Navigation({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
 
@@ -29,12 +29,12 @@ function Navigation({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
           <nav className={`navigation__links ${isMenuOpen && 'navigation__links_active'}`}>
             <div className={`navigation__container ${isMenuOpen && 'navigation__container_active'}`}>
               <ul className="navigation__list navigation__list-logged-in">
-                <li className="navigation__item"><a className="navigation__link navigation__link-main-page" href="#">Главная</a></li>
-                <li className="navigation__item"><a className="navigation__link navigation__link_type_bold" href="#">Фильмы</a></li>
-                <li className="navigation__item"><a className="navigation__link" href="#">Сохранённые фильмы</a></li>
+                <li className="navigation__item"><Link className="navigation__link navigation__link-main-page" to="/">Главная</Link></li>
+                <li className="navigation__item"><Link className="navigation__link navigation__link_type_bold" to="/movies">Фильмы</Link></li>
+                <li className="navigation__item"><Link className="navigation__link" to="/saved-movies">Сохранённые фильмы</Link></li>
                 <li className="navigation__item navigation__link-account-container">
-                  <img className="navigation__account-icon" src={account} />
-                  <a className="navigation__link navigation__link-account" href="#">Аккаунт</a>
+                  <img className="navigation__account-icon" src={account} alt="иконка аккаунта"/>
+                  <Link className="navigation__link navigation__link-account" to="/profile">Аккаунт</Link>
                 </li>
               </ul>
             </div>
@@ -43,8 +43,8 @@ function Navigation({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
       ) : (
         <nav className="navigation__links-main-page">
           <ul className="navigation__list navigation__list-main-page">
-            <a className="navigation__link-signup" href="#">Регистрация</a>
-            <a className="navigation__link-signin" href="#">Войти</a>
+            <Link className="navigation__link-signup" to="/signup">Регистрация</Link>
+            <Link className="navigation__link-signin" to="/signin">Войти</Link>
           </ul>
         </nav>
         )

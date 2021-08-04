@@ -7,7 +7,7 @@ function Profile({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
       <Header {...{pathname, isMenuOpen, setMenuOpen, loggedIn}}/>
       <section className="profile">
         <div className="profile__container">
-          <h2 className="profile__title">Привет, Виталий!</h2>
+          <h2 className="profile__title">Привет, Алексей!</h2>
           <form className="profile__form">
             <fieldset className="profile__form-fieldset">
               <div className="profile__form-item">

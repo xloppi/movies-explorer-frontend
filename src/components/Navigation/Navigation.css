@@ -5,7 +5,13 @@
   margin: 0 50px;
   text-decoration: none;
   color: #FFFFFF;
+  transition: all 0.3s;
 }
+
+.navigation__link-signup:hover {
+  opacity: 0.3;
+}
+
 .navigation__link-signin {
   text-decoration: none;
   font-weight: 500;
@@ -15,6 +21,11 @@
   background-color: #2BE080;
   border-radius: 3px;
   padding: 8px 20px;
+  transition: all 0.3s;
+}
+
+.navigation__link-signin:hover {
+  opacity: 0.3;
 }
 
 .navigation__list {
@@ -170,6 +181,9 @@
   .navigation__link-signin {
     font-size: 10px;
   }
+  .navigation__container {
+    width: 100%;
+  }
 }
 
 .navigation__links_active {
@@ -196,3 +210,4 @@
   transform: rotate(-45deg);
   bottom: 10px;
 }
+

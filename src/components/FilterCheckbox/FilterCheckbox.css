@@ -40,3 +40,10 @@
 .filter-checkbox__checkbox:checked::before {
   left: 18px;
 }
+
+@media screen and (max-width: 320px) {
+  .filter-checkbox__title {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}
