@@ -1,0 +1,35 @@
+.header {
+  background-color: #fff;
+  flex: 0 1 auto;
+}
+
+.header_theme_azure-black {
+  background-color: #073042;
+}
+
+.header__container {
+  max-width: 1140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 18px 30px 18px;
+}
+.header__btn-signup {
+  margin: 0 50px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.header__btn-signin {
+  text-decoration: none;
+  color: #000000;
+  background-color: #2BE080;
+  border-radius: 3px;
+  padding: 8px 20px;
+}
+
+@media screen and (max-width: 320px) {
+  .header__container {
+    padding: 18px 14px 18px;
+  }
+}

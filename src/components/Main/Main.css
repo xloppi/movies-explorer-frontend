@@ -1,0 +1,17 @@
+.main__section-title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  border-bottom: solid 1px;
+  padding: 110px 0 20px;
+  margin: 0 0 70px;
+}
+
+@media screen and (max-width: 320px) {
+  .main__section-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 70px 0 28px;
+    margin: 0 0 60px;
+  }
+}
