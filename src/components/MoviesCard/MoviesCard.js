@@ -19,7 +19,7 @@ function MoviesCard({ pathname }) {
     return (
       <li className="movies-card">
         <img className="movies-card__image" src={cardImage} alt={"описание которое будет приходить с сервера"} />
-        { (pathname !== '/movies') ? (
+        { (pathname === '/movies') ? (
           <button
             className={`movies-card__button-save ${isCardSaved && 'movies-card__button-save-active'}`}
             onClick={hadleCardLike}

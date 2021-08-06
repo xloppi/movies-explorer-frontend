@@ -5,23 +5,43 @@ export function useFormWithValidation() {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (event) => {
+  const customValidation = (name, value) => {
+
+    if (name === 'name') {
+      const re =  /[a-zA-Z \-а-яА-я]+/;
+      if (!re.test(value)) {
+        setErrors({...errors, [name]: 'Имя может содержать только латиницу, кириллицу, пробел или дефис' })
+        setIsValid(false)
+      }
+    }
+
+    if (name === 'email') {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(String(value).toLowerCase())) {
+        setErrors({...errors, [name]: 'Невалидный адрес электронной почты' })
+        setIsValid(false)
+      }
+    }
+  }
+
+  const handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
-    const value = target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     setValues({...values, [name]: value});
     setErrors({...errors, [name]: target.validationMessage });
+    customValidation(name, value);
     setIsValid(target.closest("form").checkValidity());
   };
 
-  const resetForm = useCallback(
+/*   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
     [setValues, setErrors, setIsValid]
-  );
+  ); */
 
-  return { values, handleChange, errors, isValid, resetForm };
+  return { values, handleInputChange, errors, isValid };
 }

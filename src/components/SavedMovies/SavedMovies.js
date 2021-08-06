@@ -12,7 +12,7 @@ function SavedMovies({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
         <main className="saved-movies">
           <div className="saved-movies__container">
           <SearchForm />
-          <MoviesCardList />
+          <MoviesCardList {...{pathname}}/>
           <MoreButton />
           </div>
         </main>
