@@ -5,10 +5,10 @@ export function useFormWithValidation() {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
-  const customValidation = (name, value) => {
+  const validationField = (name, value) => {
 
     if (name === 'name') {
-      const re =  /[a-zA-Z \-а-яА-я]+/;
+      const re = /^[a-zA-Zа-яА-я/ /-]+$/;
       if (!re.test(value)) {
         setErrors({...errors, [name]: 'Имя может содержать только латиницу, кириллицу, пробел или дефис' })
         setIsValid(false)
@@ -30,18 +30,9 @@ export function useFormWithValidation() {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     setValues({...values, [name]: value});
     setErrors({...errors, [name]: target.validationMessage });
-    customValidation(name, value);
+    validationField(name, value);
     setIsValid(target.closest("form").checkValidity());
   };
-
-/*   const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
-      setIsValid(newIsValid);
-    },
-    [setValues, setErrors, setIsValid]
-  ); */
 
   return { values, handleInputChange, errors, isValid };
 }
