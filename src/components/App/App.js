@@ -8,7 +8,7 @@ import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import Preloader from "../Preloader/Preloader"
 import * as moviesApi from '../../utils/MoviesApi';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 
 function App() {
@@ -18,12 +18,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [movieCards, setMovieCards] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-  const [error, setError] = useState("");
+  const [isFilterChecked, setIsFilterChecked] = useState(false);
 
-  const getMovieCards = (event) => {
-    const query = event.target.search.value;
-    console.log(query);
-    event.preventDefault();
+  const getMovieCards = (query) => {
     if (query) {
       setIsloading(true);
       moviesApi.getContent()
@@ -36,14 +33,26 @@ function App() {
               return c;
             }
           });
-          localStorage.setItem("beatFilmMovies", JSON.stringify(beatFilmMovies));
-          setMovieCards(beatFilmMovies);
+
+          if (!isFilterChecked) {
+            localStorage.setItem("beatFilmMovies", JSON.stringify(beatFilmMovies));
+            setMovieCards(beatFilmMovies);
+            console.log(beatFilmMovies)
+          } else {
+            const shortFilms = filterShortFilms(beatFilmMovies);
+            localStorage.setItem("beatFilmMovies", JSON.stringify(shortFilms));
+            setMovieCards(shortFilms);
+            console.log(shortFilms)
+          }
         })
         .catch((err) => {console.log(err)})
-    } else {
-      setError("Нужно ввести ключевое слово");
+        .finally(() => setIsloading(false));
     }
   };
+
+  const filterShortFilms = (data) => {
+      return data.filter((item) => item.duration <= 40);
+  }
 
   return (
     <div className="app">
@@ -63,9 +72,9 @@ function App() {
               loggedIn,
               setLoggedIn,
               getMovieCards,
-              error,
-              setError,
-              movieCards
+              movieCards,
+              isLoading,
+              setIsFilterChecked
             }}
           />
         </Route>

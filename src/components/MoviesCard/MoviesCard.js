@@ -1,8 +1,7 @@
 import './MoviesCard.css';
-import cardImage from '../../images/cards_images/card_image_1.jpg'
 import { useState } from 'react';
 
-function MoviesCard({ pathname }) {
+function MoviesCard({ pathname, card }) {
 
   // Для проверки кнопки сохранить
 
@@ -16,9 +15,14 @@ function MoviesCard({ pathname }) {
     }
   }
 
+  const cardImageUrl = `https://api.nomoreparties.co${card.image.url}`
+
+
     return (
       <li className="movies-card">
-        <img className="movies-card__image" src={cardImage} alt={"описание которое будет приходить с сервера"} />
+        <a href={card.trailerLink} target="_blank" rel="noreferrer">
+         <img className="movies-card__image" src={cardImageUrl} alt={"описание которое будет приходить с сервера"} />
+        </a>
         { (pathname === '/movies') ? (
           <button
             className={`movies-card__button-save ${isCardSaved && 'movies-card__button-save-active'}`}
@@ -32,9 +36,9 @@ function MoviesCard({ pathname }) {
           />
         )}
         <div className="movies-card__description">
-          <h2 className="movies-card__title">33 слова о дизайне11111111111111111111111111111111111111111111</h2>
+          <h2 className="movies-card__title">{card.nameRU}</h2>
           <div className="movies-card__time-container">
-            <p className="movies-card__time">1ч 17м</p>
+            <p className="movies-card__time">{Math.floor(card.duration/60)}ч {card.duration%60}м</p>
           </div>
         </div>
       </li>

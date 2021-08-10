@@ -22,6 +22,13 @@ export function useFormWithValidation() {
         setIsValid(false)
       }
     }
+
+    if (name === 'search') {
+      if (!value) {
+        setErrors({...errors, [name]: 'Нужно ввести ключевое слово' })
+        setIsValid(false)
+      }
+    }
   }
 
   const handleInputChange = (event) => {
