@@ -2,9 +2,39 @@ import "./Register.css";
 import logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-function Register() {
-  const { values, handleInputChange, errors, isValid } = useFormWithValidation();
+function Register({handleRegister, serverError}) {
+  const { values, handleInputChange, errors, isValid} = useFormWithValidation();
+
+  const [serverErrorMessage, setServerErrorMessage] = useState('')
+  const [registerData, setRegisterData] = useState({
+    email: '',
+    password: '',
+    name: '',
+  });
+
+  useEffect(() => {
+    setRegisterData({
+      email: values.email,
+      password: values.password,
+      name: values.name,
+    })
+  },[values]);
+
+  useEffect(() => {
+    if(serverError === 409) {
+      setServerErrorMessage('Такой пользователь уже существует');
+    }
+    if(serverError === 400) {
+      setServerErrorMessage('Переданы некорректные данные при создании пользователя');
+    }
+  }, [serverError]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleRegister(registerData);
+  }
 
   return (
     <div className="register">
@@ -14,7 +44,7 @@ function Register() {
           <h1 className="register__header-title">Добро пожаловать!</h1>
         </header>
         <main className="register__content">
-          <form className="register__form">
+          <form className="register__form" onSubmit={handleSubmit}>
             <fieldset className="register__form-fieldset">
               <p className="register__form-input-name">Имя</p>
               <input
@@ -58,9 +88,12 @@ function Register() {
                 {errors.password || ""}
               </span>
             </fieldset>
+            <span className="register__form-server-error">
+                {serverErrorMessage}
+              </span>
             <button
               className={`register__form-button-submit ${!isValid && "register__form-button-submit_disabled"}`}
-              type="button"
+              type="submit"
               disabled={!isValid}
             >
               Зарегистрироваться

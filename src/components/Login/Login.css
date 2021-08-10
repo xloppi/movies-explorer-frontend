@@ -42,6 +42,14 @@
   box-sizing: border-box;
 }
 
+.login__form-input-error {
+  display: block;
+  height: 12px;
+  color: #FF3055;
+  font-size: 10px;
+  line-height: 12px;
+}
+
 .login__form-input-name {
   color: #A0A0A0;
   font-weight: 400;
@@ -62,6 +70,11 @@
   margin: 180px 0 16px;
   transition: all 0.3s;
   cursor: pointer;
+}
+
+.login__form-button-submit_disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
 }
 
 .login__form-button-submit:hover {

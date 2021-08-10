@@ -22,13 +22,6 @@ export function useFormWithValidation() {
         setIsValid(false)
       }
     }
-
-    if (name === 'search') {
-      if (!value) {
-        setErrors({...errors, [name]: 'Нужно ввести ключевое слово' })
-        setIsValid(false)
-      }
-    }
   }
 
   const handleInputChange = (event) => {
@@ -37,8 +30,8 @@ export function useFormWithValidation() {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     setValues({...values, [name]: value});
     setErrors({...errors, [name]: target.validationMessage });
-    validationField(name, value);
     setIsValid(target.closest("form").checkValidity());
+    validationField(name, value);
   };
 
   return { values, handleInputChange, errors, isValid };
