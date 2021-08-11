@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 function MoviesCard({ pathname, card, handleMovieCardSave, savedMovieCards }) {
   const cardImageUrl = `https://api.nomoreparties.co${card.image.url}`
-/*   const [isCardSaved, setCardSaved] = useState(false);
+  const [isCardSaved, setCardSaved] = useState(false);
 
   useEffect(() => {
     if (savedMovieCards.some(elem => elem.movieId === card.id)) {
@@ -11,10 +11,10 @@ function MoviesCard({ pathname, card, handleMovieCardSave, savedMovieCards }) {
     } else {
       setCardSaved(false)
     }
-  },[savedMovieCards, card]); */
+  },[savedMovieCards, card]);
 
-  const isCardSaved = savedMovieCards.some(elem => elem.movieId === card.id);
-  console.log(savedMovieCards)
+/*   const isCardSaved = savedMovieCards.some(elem => elem.movieId === card.id);
+  console.log(savedMovieCards) */
 
   const handleClick = () => {
     handleMovieCardSave(card);
