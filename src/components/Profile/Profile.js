@@ -97,7 +97,7 @@ function Profile({
               </fieldset>
             )}
             <span className="login__form-server-error">
-              {serverErrorMessage}"Ошибка на сервере"
+              {serverErrorMessage}
             </span>
             <button
               className={`profile__form-button-submit ${

@@ -2,9 +2,9 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useState } from 'react';
 
-function SearchForm({getMovieCards, setIsFilterChecked}) {
-  const [query, setQuery] = useState("");
+function SearchForm({onSearch, setIsFilterChecked}) {
   const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
@@ -13,7 +13,7 @@ function SearchForm({getMovieCards, setIsFilterChecked}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if(event.target.search.value) {
-      getMovieCards(query);
+      onSearch(query);
     } else {
       setError("Нужно ввести ключевое слово");
     }

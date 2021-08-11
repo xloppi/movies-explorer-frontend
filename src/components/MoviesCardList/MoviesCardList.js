@@ -15,8 +15,6 @@ function MoviesCardList({
   const [count, setCount] = useState(12);
   const [countAddCards, setCountAddCards] = useState(3);
 
-  console.log(savedMovieCards);
-
   const checkWindowWidth = () => {
     if (window.innerWidth >= 768) {
       setCount(12);
