@@ -92,8 +92,8 @@ export const saveMovieCard = ({country, director, duration, year, description, i
    .then(parseResponse);
 }
 
-export const deleteMovieCard = (movieId, token) => {
-  return fetch(`${this.url}/movies/${movieId}`, {
+export const deleteMovieCard = (id, token) => {
+  return fetch(`${BASE_URL}/movies/${id}`, {
     method: 'DELETE',
     headers: {
       "Content-Type": "application/json",
@@ -115,6 +115,23 @@ export const getSavedMovieCards = (token) => {
   })
   .then(parseResponse);
 }
+
+export const updateUser = (data, token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify ({
+      "name": data.name,
+      "email": data.email,
+    }),
+    credentials: 'include',
+  })
+  .then(parseResponse);
+}
+
 //country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId
 
 //Для выхода при использовании куков для авторизации

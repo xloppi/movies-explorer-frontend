@@ -3,15 +3,17 @@ import logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Preloader from "../Preloader/Preloader";
 
-function Register({handleRegister, serverError}) {
-  const { values, handleInputChange, errors, isValid} = useFormWithValidation();
+function Register({ handleRegister, serverError, isLoading }) {
+  const { values, handleInputChange, errors, isValid } =
+    useFormWithValidation();
 
-  const [serverErrorMessage, setServerErrorMessage] = useState('')
+  const [serverErrorMessage, setServerErrorMessage] = useState("");
   const [registerData, setRegisterData] = useState({
-    email: '',
-    password: '',
-    name: '',
+    email: "",
+    password: "",
+    name: "",
   });
 
   useEffect(() => {
@@ -19,22 +21,24 @@ function Register({handleRegister, serverError}) {
       email: values.email,
       password: values.password,
       name: values.name,
-    })
-  },[values]);
+    });
+  }, [values]);
 
   useEffect(() => {
-    if(serverError === 409) {
-      setServerErrorMessage('Такой пользователь уже существует');
+    if (serverError === 409) {
+      setServerErrorMessage("Такой пользователь уже существует");
     }
-    if(serverError === 400) {
-      setServerErrorMessage('Переданы некорректные данные при создании пользователя');
+    if (serverError === 400) {
+      setServerErrorMessage(
+        "Переданы некорректные данные при создании пользователя"
+      );
     }
   }, [serverError]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     handleRegister(registerData);
-  }
+  };
 
   return (
     <div className="register">
@@ -45,54 +49,60 @@ function Register({handleRegister, serverError}) {
         </header>
         <main className="register__content">
           <form className="register__form" onSubmit={handleSubmit}>
-            <fieldset className="register__form-fieldset">
-              <p className="register__form-input-name">Имя</p>
-              <input
-                type="text"
-                name="name"
-                id="name-input"
-                className="register__form-input"
-                minLength="2"
-                maxLength="30"
-                onChange={handleInputChange}
-                value={values.name || ""}
-                required
-              />
-              <span className="register__form-input-error">
-                {errors.name || ""}
-              </span>
-              <p className="register__form-input-name">E-mail</p>
-              <input
-                type="email"
-                name="email"
-                id="email-input"
-                className="register__form-input"
-                onChange={handleInputChange}
-                value={values.email || ""}
-                required
-              />
-              <span className="register__form-input-error">
-                {errors.email || ""}
-              </span>
-              <p className="register__form-input-name">Пароль</p>
-              <input
-                type="password"
-                name="password"
-                id="password-input"
-                className="register__form-input"
-                onChange={handleInputChange}
-                value={values.password || ""}
-                required
-              />
-              <span className="register__form-input-error">
-                {errors.password || ""}
-              </span>
-            </fieldset>
+            {isLoading ? (
+              <Preloader />
+            ) : (
+              <fieldset className="register__form-fieldset">
+                <p className="register__form-input-name">Имя</p>
+                <input
+                  type="text"
+                  name="name"
+                  id="name-input"
+                  className="register__form-input"
+                  minLength="2"
+                  maxLength="30"
+                  onChange={handleInputChange}
+                  value={values.name || ""}
+                  required
+                />
+                <span className="register__form-input-error">
+                  {errors.name || ""}
+                </span>
+                <p className="register__form-input-name">E-mail</p>
+                <input
+                  type="email"
+                  name="email"
+                  id="email-input"
+                  className="register__form-input"
+                  onChange={handleInputChange}
+                  value={values.email || ""}
+                  required
+                />
+                <span className="register__form-input-error">
+                  {errors.email || ""}
+                </span>
+                <p className="register__form-input-name">Пароль</p>
+                <input
+                  type="password"
+                  name="password"
+                  id="password-input"
+                  className="register__form-input"
+                  onChange={handleInputChange}
+                  value={values.password || ""}
+                  required
+                />
+                <span className="register__form-input-error">
+                  {errors.password || ""}
+                </span>
+              </fieldset>
+            )}
             <span className="register__form-server-error">
-                {serverErrorMessage}
+              {serverErrorMessage}
             </span>
             <button
-              className={`register__form-button-submit ${!isValid && "register__form-button-submit_disabled"}`}
+              className={`register__form-button-submit ${
+                !isValid && "register__form-button-submit_disabled"
+              }`}
               type="submit"
               disabled={!isValid}
             >

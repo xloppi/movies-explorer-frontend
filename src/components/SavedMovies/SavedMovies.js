@@ -2,18 +2,16 @@ import './SavedMovies.css';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import MoreButton from "../MoreButton/MoreButton";
 import Footer from "../Footer/Footer";
 
-function SavedMovies({pathname, isMenuOpen, setMenuOpen, loggedIn}) {
+function SavedMovies({pathname, loggedIn, movieCards, setIsFilterChecked, savedMovieCards, handleMovieCardDelete}) {
     return (
       <>
-        <Header {...{pathname, isMenuOpen, setMenuOpen, loggedIn}}/>
+        <Header {...{pathname, loggedIn}}/>
         <main className="saved-movies">
           <div className="saved-movies__container">
-          <SearchForm />
-          <MoviesCardList {...{pathname}}/>
-          <MoreButton />
+          <SearchForm {...{ setIsFilterChecked }}/>
+          <MoviesCardList {...{pathname, movieCards, savedMovieCards, handleMovieCardDelete}} renderCards={savedMovieCards}/>
           </div>
         </main>
         <Footer />

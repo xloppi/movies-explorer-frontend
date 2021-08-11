@@ -1,17 +1,21 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import MoreButton from "../MoreButton/MoreButton";
+import Preloader from "../Preloader/Preloader";
 import { useState, useEffect } from "react";
 
 function MoviesCardList({
   pathname,
-  movieCards,
   isLoading,
+  renderCards,
   handleMovieCardSave,
+  handleMovieCardDelete,
   savedMovieCards,
 }) {
   const [count, setCount] = useState(12);
   const [countAddCards, setCountAddCards] = useState(3);
+
+  console.log(savedMovieCards);
 
   const checkWindowWidth = () => {
     if (window.innerWidth >= 768) {
@@ -47,21 +51,39 @@ function MoviesCardList({
   return (
     <section className="movies-card-list">
       <div className="movies-card-list__container">
-        <ul className="movies-card-list__list">
-          {movieCards.slice(0, count).map((card) => (
-            <MoviesCard
-              key={card.id}
-              card={card}
-              pathname={pathname}
-              savedMovieCards={savedMovieCards}
-              handleMovieCardSave={handleMovieCardSave}
-            />
-          ))}
-        </ul>
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <ul className="movies-card-list__list">
+            {renderCards.slice(0, count).map((card) => (
+              <MoviesCard
+                key={card.id ? card.id : card._id}
+                card={card}
+                pathname={pathname}
+                savedMovieCards={savedMovieCards}
+                handleMovieCardDelete={handleMovieCardDelete}
+                handleMovieCardSave={handleMovieCardSave}
+              />
+            ))}
+          </ul>
+        )}
       </div>
-      {count < movieCards.length && <MoreButton {...{ handleAddCards }} />}
+      {(count < renderCards.length && !isLoading) && <MoreButton {...{ handleAddCards }} />}
     </section>
   );
 }
 
 export default MoviesCardList;
+
+/*   renderCards
+    .slice(0, count)
+    .map((card) => (
+      <MoviesCard
+        key={card.id ? card.id : card._id}
+        card={card}
+        pathname={pathname}
+        savedMovieCards={savedMovieCards}
+        handleMovieCardDelete={handleMovieCardDelete}
+        handleMovieCardSave={handleMovieCardSave}
+      />
+    )) */

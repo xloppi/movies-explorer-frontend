@@ -1,8 +1,9 @@
 import './MoviesCard.css';
 import { useState, useEffect } from 'react';
 
-function MoviesCard({ pathname, card, handleMovieCardSave, savedMovieCards }) {
-  const cardImageUrl = `https://api.nomoreparties.co${card.image.url}`
+function MoviesCard({ pathname, card, handleMovieCardSave, handleMovieCardDelete, savedMovieCards }) {
+  const cardImageUrl = pathname === '/movies' ? `https://api.nomoreparties.co${card.image.url}` : card.image
+  const trailer = pathname === '/movies' ? card.trailerLink : card.trailer
   const [isCardSaved, setCardSaved] = useState(false);
 
   useEffect(() => {
@@ -17,12 +18,21 @@ function MoviesCard({ pathname, card, handleMovieCardSave, savedMovieCards }) {
   console.log(savedMovieCards) */
 
   const handleClick = () => {
-    handleMovieCardSave(card);
+    if (isCardSaved) {
+      handleMovieCardDelete(card);
+    }
+    if (!isCardSaved) {
+      handleMovieCardSave(card);
+    }
+  }
+
+  const handleClickDelete = () => {
+    handleMovieCardDelete(card);
   }
 
     return (
       <li className="movies-card">
-        <a href={card.trailerLink} target="_blank" rel="noreferrer">
+        <a href={trailer} target="_blank" rel="noreferrer">
          <img className="movies-card__image" src={cardImageUrl} alt={"описание которое будет приходить с сервера"} />
         </a>
         { (pathname === '/movies') ? (
@@ -34,7 +44,7 @@ function MoviesCard({ pathname, card, handleMovieCardSave, savedMovieCards }) {
           </button>
         ) : (
           <button
-
+            onClick={handleClickDelete}
             className="movies-card__button-save movies-card__button-delete"
           />
         )}

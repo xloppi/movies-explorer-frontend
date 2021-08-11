@@ -6,30 +6,30 @@ import Footer from "../Footer/Footer";
 
 function Movies({
   pathname,
-  isMenuOpen,
-  setMenuOpen,
   loggedIn,
   getMovieCards,
   movieCards,
   isLoading,
   setIsFilterChecked,
   handleMovieCardSave,
+  handleMovieCardDelete,
   savedMovieCards,
 }) {
   return (
     <>
-      <Header {...{ pathname, isMenuOpen, setMenuOpen, loggedIn }} />
+      <Header {...{ pathname, loggedIn }} />
       <main className="movies">
         <div className="movies__container">
           <SearchForm {...{ getMovieCards, setIsFilterChecked }} />
           <MoviesCardList
             {...{
               pathname,
-              movieCards,
               isLoading,
               handleMovieCardSave,
+              handleMovieCardDelete,
               savedMovieCards,
             }}
+            renderCards={movieCards}
           />
         </div>
       </main>
