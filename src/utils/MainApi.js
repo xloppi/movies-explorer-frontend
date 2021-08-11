@@ -14,7 +14,7 @@ POST /signup - создаёт пользователя с переданными
 POST /signin - проверяет переданные в теле почту и пароль и возвращает JWT
 
 POST /signout - выход из профиля(удаляет токен) */
-export const BASE_URL = 'https://api.hlopkov-movies-exp.nomoredomains.monster';
+const BASE_URL = 'https://api.hlopkov-movies-exp.nomoredomains.monster';
 
 const parseResponse = (res) => {
 
@@ -46,27 +46,85 @@ export const authorize = ({password, email}) => {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: 'include',
     body: JSON.stringify ({
       "email": email,
       "password": password,
     })
   })
-  .then((res) => {
-    if(res.ok) {
-      return res;
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(parseResponse)
 }
 
-export const getMe = () => {
+
+export const getMe = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    credentials: 'include',
+  })
+  .then(parseResponse)
+}
+
+export const saveMovieCard = ({country, director, duration, year, description, image, trailerLink, nameRU, nameEN, id}, token) => {
+  return fetch(`${BASE_URL}/movies`, {
+     method:'POST',
+     headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+     body: JSON.stringify ({
+      "country": country,
+      "director": director,
+      "duration": duration,
+      "year": year,
+      "description": description,
+      "image": `https://api.nomoreparties.co${image.url}`,
+      "trailer": trailerLink,
+      "nameRU": nameRU,
+      "nameEN": nameEN,
+      "thumbnail": `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
+      "movieId": id,
+    }),
+     credentials: 'include',
+   })
+   .then(parseResponse);
+}
+
+export const deleteMovieCard = (movieId, token) => {
+  return fetch(`${this.url}/movies/${movieId}`, {
+    method: 'DELETE',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    credentials: 'include',
+  })
+  .then(parseResponse);
+}
+
+export const getSavedMovieCards = (token) => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    credentials: 'include',
+  })
+  .then(parseResponse);
+}
+//country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId
+
+//Для выхода при использовании куков для авторизации
+/* export const signout = () => {
+  return fetch(`${BASE_URL}/signout`, {
+    method: 'POST',
     headers: {
       "Content-Type": "application/json",
     },
     credentials: 'include',
   })
   .then(parseResponse)
-}
+} */

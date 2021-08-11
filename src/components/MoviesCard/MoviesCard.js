@@ -1,22 +1,24 @@
 import './MoviesCard.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function MoviesCard({ pathname, card }) {
-
-  // Для проверки кнопки сохранить
-
-  const [isCardSaved, setCardSaved] = useState(false);
-
-  const hadleCardLike = () => {
-    if (isCardSaved) {
-      setCardSaved(false)
-    } else {
-      setCardSaved(true)
-    }
-  }
-
+function MoviesCard({ pathname, card, handleMovieCardSave, savedMovieCards }) {
   const cardImageUrl = `https://api.nomoreparties.co${card.image.url}`
+/*   const [isCardSaved, setCardSaved] = useState(false);
 
+  useEffect(() => {
+    if (savedMovieCards.some(elem => elem.movieId === card.id)) {
+      setCardSaved(true);
+    } else {
+      setCardSaved(false)
+    }
+  },[savedMovieCards, card]); */
+
+  const isCardSaved = savedMovieCards.some(elem => elem.movieId === card.id);
+  console.log(savedMovieCards)
+
+  const handleClick = () => {
+    handleMovieCardSave(card);
+  }
 
     return (
       <li className="movies-card">
@@ -26,12 +28,13 @@ function MoviesCard({ pathname, card }) {
         { (pathname === '/movies') ? (
           <button
             className={`movies-card__button-save ${isCardSaved && 'movies-card__button-save-active'}`}
-            onClick={hadleCardLike}
+            onClick={handleClick}
           >
             Сохранить
           </button>
         ) : (
           <button
+
             className="movies-card__button-save movies-card__button-delete"
           />
         )}

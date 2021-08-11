@@ -90,7 +90,7 @@ function Register({handleRegister, serverError}) {
             </fieldset>
             <span className="register__form-server-error">
                 {serverErrorMessage}
-              </span>
+            </span>
             <button
               className={`register__form-button-submit ${!isValid && "register__form-button-submit_disabled"}`}
               type="submit"

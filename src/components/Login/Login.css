@@ -50,6 +50,16 @@
   line-height: 12px;
 }
 
+.login__form-server-error {
+  display: block;
+  text-align: center;
+  height: 32px;
+  color: #FF3055;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 32px 0 0;
+}
+
 .login__form-input-name {
   color: #A0A0A0;
   font-weight: 400;

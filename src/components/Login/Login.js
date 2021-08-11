@@ -68,6 +68,9 @@ function Login({handleLogin, serverError}) {
                 {errors.password || ''}
               </span>
             </fieldset>
+            <span className="login__form-server-error">
+                {serverErrorMessage}
+            </span>
             <button className={`login__form-button-submit ${!isValid && "login__form-button-submit_disabled"}`} type="submit" disabled={!isValid}>Войти</button>
           </form>
           <div className="login__navigation">

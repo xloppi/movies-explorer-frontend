@@ -4,30 +4,23 @@ import { useFormWithValidation } from "../../hooks/useForm";
 import { useState, useEffect } from "react";
 
 
-function Profile({pathname, isMenuOpen, setMenuOpen, loggedIn, currentUser}) {
+function Profile({pathname, isMenuOpen, setMenuOpen, loggedIn, currentUser, handleLogout}) {
   const [sameData, setSameData] = useState(true);
 
   const { values, handleInputChange, errors, isValid,  } = useFormWithValidation();
-  const {name, email} = currentUser;
-
-/*   useEffect(() => {
-    values.name = currentUser.name;
-    values.email = currentUser.email;
-  },[]); */
 
   useEffect(() => {
-    console.log(values.name, values.email)
-    if (values.name === name || values.email === email) {
+    if (values.name === currentUser.name || values.email === currentUser.email) {
       setSameData(true)
     }
-  },[values]);
+  },[values, currentUser]);
 
   return (
     <>
       <Header {...{pathname, isMenuOpen, setMenuOpen, loggedIn}}/>
       <section className="profile">
         <div className="profile__container">
-          <h2 className="profile__title">Привет, {name}!</h2>
+          <h2 className="profile__title">Привет, {currentUser.name}!</h2>
           <form className="profile__form">
             <fieldset className="profile__form-fieldset">
               <div className="profile__form-item">
@@ -35,6 +28,7 @@ function Profile({pathname, isMenuOpen, setMenuOpen, loggedIn, currentUser}) {
                 <input
                   type="text"
                   name="name"
+                  placeholder={currentUser.name}
                   value={values.name || ''}
                   onChange={handleInputChange}
                   id="name-input"
@@ -50,6 +44,7 @@ function Profile({pathname, isMenuOpen, setMenuOpen, loggedIn, currentUser}) {
                 <input
                   type="email"
                   name="email"
+                  placeholder={currentUser.email}
                   value={values.email || ''}
                   onChange={handleInputChange}
                   id="name-input"
@@ -63,7 +58,7 @@ function Profile({pathname, isMenuOpen, setMenuOpen, loggedIn, currentUser}) {
             </fieldset>
             <button className={`profile__form-button-submit ${!isValid && "profile__form-button-submit_disabled"}`} type="submit" disabled={(!isValid && sameData)}>Редактировать</button>
           </form>
-          <button className="profile__button-exit">Выйти из аккаунта</button>
+          <button className="profile__button-exit" onClick={handleLogout}>Выйти из аккаунта</button>
         </div>
       </section>
     </>

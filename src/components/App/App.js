@@ -17,11 +17,17 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movieCards, setMovieCards] = useState([]);
+  const [savedMovieCards, setSavedMovieCards] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const [serverError, setServerError] = useState('');
   const history = useHistory();
 //
+  useEffect(() => {
+    setMovieCards(JSON.parse(localStorage.getItem('beatFilmMovies')));
+    console.log(movieCards)
+  }, [])
+
   useEffect(() => {
     tokenCheck()
   }, [])
@@ -34,9 +40,10 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      mainApi.getMe()
+      const token = localStorage.getItem('token');
+      mainApi.getSavedMovieCards(token)
       .then(res => {
-        setCurrentUser(res);
+        setSavedMovieCards(res);
       })
       .catch((err) => {
         console.log('Ошибка: ', err);
@@ -45,13 +52,17 @@ function App() {
   }, [loggedIn])
 
   const tokenCheck = () => {
-    mainApi.getMe()
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return
+    }
+    mainApi.getMe(token)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res)
         setLoggedIn(true);
       })
       .catch((err) => {
-        {console.log(err)}
+        console.log(err)
       })
   }
 
@@ -67,6 +78,7 @@ function App() {
             if (c.nameEN !== null && c.nameEN.toLowerCase().includes(query)) {
               return c;
             }
+            return false
           });
 
           if (!isFilterChecked) {
@@ -89,6 +101,19 @@ function App() {
       return data.filter((item) => item.duration <= 40);
   }
 
+  const handleMovieCardSave = (card) => {
+    //const isSaved = savedMovieCards.some(i => i === card);
+    const token = localStorage.getItem('token');
+    mainApi.saveMovieCard(card, token)
+    .then((newCard) => {
+      setSavedMovieCards([...savedMovieCards, newCard]);
+      console.log(savedMovieCards)
+    })
+    .catch((err) => {
+      console.log('Ошибка: ', err);
+    });
+  }
+
   const handleRegister = (data) => {
     setIsloading(true);
     mainApi.register(data)
@@ -108,9 +133,10 @@ function App() {
   const handleLogin = (data) => {
     setIsloading(true);
     mainApi.authorize(data)
-      .then((res) =>{
+      .then(({token}) =>{
+        localStorage.setItem('token', token);
         setLoggedIn(true);
-        history.push('/movies');
+        tokenCheck();
       })
       .catch((err) => {
         setServerError(err.status)
@@ -118,6 +144,12 @@ function App() {
       .finally(() => {
         setIsloading(false);
       })
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    history.push('/');
   }
 
   return (
@@ -140,20 +172,22 @@ function App() {
               getMovieCards,
               movieCards,
               isLoading,
-              setIsFilterChecked
+              setIsFilterChecked,
+              handleMovieCardSave,
+              savedMovieCards,
             }}
           />
         </Route>
 
         <Route path="/saved-movies" exact>
           <SavedMovies
-            {...{ pathname, isMenuOpen, setMenuOpen, loggedIn, setLoggedIn }}
+            {...{ pathname, isMenuOpen, setMenuOpen, loggedIn, setLoggedIn, savedMovieCards }}
           />
         </Route>
 
         <Route path="/profile" exact>
           <Profile
-            {...{ pathname, isMenuOpen, setMenuOpen, loggedIn, setLoggedIn, currentUser }}
+            {...{ pathname, isMenuOpen, setMenuOpen, loggedIn, setLoggedIn, currentUser, handleLogout }}
           />
         </Route>
 
