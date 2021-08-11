@@ -53,7 +53,7 @@ function MoviesCardList({
           <Preloader />
         ) : (
           <ul className="movies-card-list__list">
-            {renderCards.slice(0, count).map((card) => (
+            {renderCards && renderCards.slice(0, count).map((card) => (
               <MoviesCard
                 key={card.id ? card.id : card._id}
                 card={card}
@@ -66,7 +66,7 @@ function MoviesCardList({
           </ul>
         )}
       </div>
-      {(count < renderCards.length && !isLoading) && <MoreButton {...{ handleAddCards }} />}
+      {(renderCards && count < renderCards.length && !isLoading) && <MoreButton {...{ handleAddCards }} />}
     </section>
   );
 }

@@ -16,7 +16,7 @@ function Movies({
   savedMovieCards,
 }) {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
-  const [renderCards, setRenderCards] = useState(movieCards);
+  const [renderCards, setRenderCards] = useState([]);
 
   const filterShortFilms = (data) => {
     return data.filter((item) => item.duration <= 40);

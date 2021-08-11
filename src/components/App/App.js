@@ -42,28 +42,6 @@ function App() {
     }
   }, [loggedIn, currentUser]);
 
-  /*   const filterMovieCards = () => {
-    if (isFilterChecked) {
-      const shortMovies = filterShortFilms(JSON.parse(localStorage.getItem("beatFilmMovies")))
-      setMovieCards(shortMovies);
-    }
-    if (!isFilterChecked) {
-      const Movies = JSON.parse(localStorage.getItem("beatFilmMovies"));
-      setMovieCards(Movies);
-    }
-  }
-
-  const filterSavedMovieCards = () => {
-    if (isFilterChecked) {
-      const shortMovies = filterShortFilms(JSON.parse(localStorage.getItem("savedCards")))
-      savedMovieCards(shortMovies);
-    }
-    if (!isFilterChecked) {
-      const Movies = JSON.parse(localStorage.getItem("savedCards"));
-      savedMovieCards(Movies);
-    }
-  } */
-
   const getSavedCards = (currentUser) => {
     const token = localStorage.getItem("token");
     mainApi
@@ -115,7 +93,6 @@ function App() {
             JSON.stringify(beatFilmMovies)
           );
           setMovieCards(beatFilmMovies);
-          console.log(movieCards);
         })
         .catch((err) => {
           console.log(err);
@@ -146,7 +123,6 @@ function App() {
       .saveMovieCard(card, token)
       .then((newMovieCard) => {
         setSavedMovieCards([...savedMovieCards, newMovieCard]);
-        console.log(savedMovieCards);
       })
       .catch((err) => {
         console.log("Ошибка: ", err);
