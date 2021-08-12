@@ -44,6 +44,7 @@ function Movies({
               isLoading,
               handleMovieCardSave,
               handleMovieCardDelete,
+              movieCards,
               savedMovieCards,
             }}
             renderCards={renderCards}

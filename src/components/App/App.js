@@ -47,7 +47,6 @@ function App() {
     mainApi
       .getSavedMovieCards(token)
       .then((res) => {
-        console.log(currentUser);
         const ownerCards = res.filter((c) => c.owner === currentUser._id && c);
         localStorage.setItem("savedCards", JSON.stringify(ownerCards));
         setSavedMovieCards(ownerCards);
@@ -131,8 +130,15 @@ function App() {
 
   const handleMovieCardDelete = (card) => {
     const token = localStorage.getItem("token");
+    let deletedCard = card;
+    if (card._id) {
+      deletedCard = card;
+    }
+    if (!card._id) {
+      deletedCard = savedMovieCards.find(c => c.movieId === card.id)
+    }
     mainApi
-      .deleteMovieCard(card._id, token)
+      .deleteMovieCard(deletedCard._id, token)
       .then((res) => {
         setSavedMovieCards((state) => state.filter((c) => c._id !== card._id));
       })

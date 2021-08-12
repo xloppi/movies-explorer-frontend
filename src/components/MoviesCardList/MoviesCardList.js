@@ -58,6 +58,7 @@ function MoviesCardList({
                 key={card.id ? card.id : card._id}
                 card={card}
                 pathname={pathname}
+                renderCards={renderCards}
                 savedMovieCards={savedMovieCards}
                 handleMovieCardDelete={handleMovieCardDelete}
                 handleMovieCardSave={handleMovieCardSave}

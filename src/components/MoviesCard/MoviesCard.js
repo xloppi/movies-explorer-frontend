@@ -1,7 +1,7 @@
 import './MoviesCard.css';
 import { useState, useEffect } from 'react';
 
-function MoviesCard({ pathname, card, handleMovieCardSave, handleMovieCardDelete, savedMovieCards }) {
+function MoviesCard({ pathname, card, handleMovieCardSave, handleMovieCardDelete, movieCards, savedMovieCards }) {
   const cardImageUrl = pathname === '/movies' ? `https://api.nomoreparties.co${card.image.url}` : card.image
   const trailer = pathname === '/movies' ? card.trailerLink : card.trailer
   const [isCardSaved, setCardSaved] = useState(false);
@@ -12,7 +12,7 @@ function MoviesCard({ pathname, card, handleMovieCardSave, handleMovieCardDelete
     } else {
       setCardSaved(false)
     }
-  },[savedMovieCards, card]);
+  },[savedMovieCards, movieCards, card]);
 
 /*   const isCardSaved = savedMovieCards.some(elem => elem.movieId === card.id);
   console.log(savedMovieCards) */
