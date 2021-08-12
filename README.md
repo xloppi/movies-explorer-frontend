@@ -25,3 +25,9 @@ npm i
 npm run start
 ```
 5. Если все сделано правильно, то приложение откроется по адресу: http://localhost:3000/.
+
+## Ссылки на проект:
+
+1. fronend - https://hlopkov-movies-explorer.nomoredomains.club
+2. backend - https://api.hlopkov-movies-exp.nomoredomains.monster
+3. Публичный ip - 84.252.136.157
