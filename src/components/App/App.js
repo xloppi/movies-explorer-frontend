@@ -16,15 +16,24 @@ function App() {
   const { pathname } = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [allMovieCards, setAllMovieCards] = useState([]);
   const [movieCards, setMovieCards] = useState([]);
   const [savedMovieCards, setSavedMovieCards] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [notFound, setNotFound] = useState(false);
   const history = useHistory();
   //
   useEffect(() => {
-    setMovieCards(JSON.parse(localStorage.getItem("beatFilmMovies")));
+    const lastSearhMovies = localStorage.getItem("lastSearchMovies");
+    if (lastSearhMovies) {
+      setMovieCards(JSON.parse(lastSearhMovies));
+    }
   }, []);
+
+  useEffect(() => {
+    setNotFound(false);
+  }, [pathname]);
 
   useEffect(() => {
     tokenCheck();
@@ -32,15 +41,30 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      history.push("/movies");
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return;
+      }
+      Promise.all([mainApi.getMe(token), mainApi.getSavedMovieCards(token)])
+        .then(([resUser, resMovies]) => {
+          setCurrentUser(resUser);
+          const ownerCards = resMovies.filter(
+            (c) => c.owner === resUser._id && c
+          );
+          localStorage.setItem("savedCards", JSON.stringify(ownerCards));
+          setSavedMovieCards(ownerCards);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, [history, loggedIn]);
+  }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn) {
-      getSavedCards(currentUser);
+      history.push("/movies");
     }
-  }, [loggedIn, currentUser]);
+  }, [history, loggedIn]);
 
   const getSavedCards = (currentUser) => {
     const token = localStorage.getItem("token");
@@ -72,49 +96,69 @@ function App() {
       });
   };
 
+  const filterByName = (data, query) => {
+    return data.filter((c) => {
+      if (c.nameRU.toLowerCase().includes(query.toLowerCase())) {
+        return c;
+      }
+      if (
+        c.nameEN !== null &&
+        c.nameEN.toLowerCase().includes(query.toLowerCase())
+      ) {
+        return c;
+      }
+      return false;
+    });
+  };
+
+  const checkNotFound = (data) => {
+    !data.length ? setNotFound(true) : setNotFound(false)
+  }
+
   const searchMovieCards = (query) => {
     if (query) {
-      setIsloading(true);
-      moviesApi
-        .getContent()
-        .then((res) => {
-          const beatFilmMovies = res.filter((c) => {
-            if (c.nameRU.toLowerCase().includes(query)) {
-              return c;
-            }
-            if (c.nameEN !== null && c.nameEN.toLowerCase().includes(query)) {
-              return c;
-            }
-            return false;
-          });
-          localStorage.setItem(
-            "beatFilmMovies",
-            JSON.stringify(beatFilmMovies)
-          );
-          setMovieCards(beatFilmMovies);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => setIsloading(false));
+      if (allMovieCards.length === 0) {
+        setIsloading(true);
+        moviesApi
+          .getContent()
+          .then((res) => {
+            localStorage.setItem("allMovies", JSON.stringify(res));
+            const allMovies = JSON.parse(localStorage.getItem("allMovies"));
+            setAllMovieCards(allMovies);
+
+            const lastSearchMovies = filterByName(res, query);
+            checkNotFound(lastSearchMovies);
+            localStorage.setItem(
+              "lastSearchMovies",
+              JSON.stringify(lastSearchMovies)
+            );
+            setMovieCards(lastSearchMovies);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => setIsloading(false));
+      }
+      if (allMovieCards.length !== 0) {
+        const lastSearchMovies = filterByName(allMovieCards, query);
+        checkNotFound(lastSearchMovies);
+        localStorage.setItem(
+          "lastSearchMovies",
+          JSON.stringify(lastSearchMovies)
+        );
+        setMovieCards(lastSearchMovies);
+      }
     }
   };
 
   const searchSavedMovieCards = (query) => {
     if (query) {
-      const savedFilms = JSON.parse(localStorage.getItem("savedCards"))
-      const filterCards = savedFilms.filter((c) => {
-        if (c.nameRU.toLowerCase().includes(query)) {
-          return c;
-        }
-        if (c.nameEN !== null && c.nameEN.toLowerCase().includes(query)) {
-          return c;
-        }
-        return false;
-      });
+      const savedFilms = JSON.parse(localStorage.getItem("savedCards"));
+      const filterCards = filterByName(savedFilms, query)
+      checkNotFound(filterCards);
       setSavedMovieCards(filterCards);
     }
-  }
+  };
 
   const handleMovieCardSave = (card) => {
     const token = localStorage.getItem("token");
@@ -135,12 +179,12 @@ function App() {
       deletedCard = card;
     }
     if (!card._id) {
-      deletedCard = savedMovieCards.find(c => c.movieId === card.id)
+      deletedCard = savedMovieCards.find((c) => c.movieId === card.id);
     }
     mainApi
       .deleteMovieCard(deletedCard._id, token)
       .then((res) => {
-        setSavedMovieCards((state) => state.filter((c) => c._id !== card._id));
+        getSavedCards(currentUser);
       })
       .catch((err) => {
         console.log("Ошибка: ", err);
@@ -152,8 +196,7 @@ function App() {
     mainApi
       .register(data)
       .then((res) => {
-        setLoggedIn(true);
-        history.push("/movies");
+        handleLogin(data);
         setServerError("");
       })
       .catch((err) => {
@@ -171,7 +214,7 @@ function App() {
       .then(({ token }) => {
         localStorage.setItem("token", token);
         setLoggedIn(true);
-        tokenCheck();
+        history.push("/movies");
         setServerError("");
       })
       .catch((err) => {
@@ -188,9 +231,8 @@ function App() {
     mainApi
       .updateUser(data, token)
       .then((res) => {
-        console.log(res);
         setCurrentUser(res);
-        setServerError("");
+        setServerError(200);
       })
       .catch((err) => {
         setServerError(err.status);
@@ -228,6 +270,8 @@ function App() {
             handleMovieCardSave,
             savedMovieCards,
             handleMovieCardDelete,
+            notFound,
+            setNotFound
           }}
         />
 
@@ -245,6 +289,8 @@ function App() {
             setSavedMovieCards,
             handleMovieCardDelete,
             searchSavedMovieCards,
+            notFound,
+            setNotFound
           }}
         />
 

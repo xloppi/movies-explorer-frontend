@@ -14,6 +14,8 @@ function Movies({
   handleMovieCardSave,
   handleMovieCardDelete,
   savedMovieCards,
+  notFound,
+  setNotFound
 }) {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const [renderCards, setRenderCards] = useState([]);
@@ -21,6 +23,10 @@ function Movies({
   const filterShortFilms = (data) => {
     return data.filter((item) => item.duration <= 40);
   };
+
+  useEffect(() => {
+    renderCards.length ? setNotFound(false) : setNotFound(true)
+  }, [isFilterChecked, renderCards, setNotFound]);
 
   useEffect(() => {
     if (isFilterChecked) {
@@ -46,6 +52,7 @@ function Movies({
               handleMovieCardDelete,
               movieCards,
               savedMovieCards,
+              notFound,
             }}
             renderCards={renderCards}
           />

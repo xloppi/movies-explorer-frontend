@@ -15,6 +15,7 @@
 }
 
 .movies-card-list__not-found {
+  font-weight: 400;
   color: #A0A0A0;
   text-align: center;
 }

@@ -11,9 +11,11 @@ function MoviesCardList({
   handleMovieCardSave,
   handleMovieCardDelete,
   savedMovieCards,
+  notFound
 }) {
   const [count, setCount] = useState(12);
   const [countAddCards, setCountAddCards] = useState(3);
+
 
   const checkWindowWidth = () => {
     if (window.innerWidth >= 768) {
@@ -49,6 +51,7 @@ function MoviesCardList({
   return (
     <section className="movies-card-list">
       <div className="movies-card-list__container">
+        {(notFound && renderCards.length === 0) && <h2 className="movies-card-list__not-found">Ничего не найдено</h2>}
         {isLoading ? (
           <Preloader />
         ) : (

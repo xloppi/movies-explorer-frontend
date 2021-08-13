@@ -26,6 +26,9 @@ function Profile({
     if (serverError === 500) {
       setServerErrorMessage("Ошибка на сервере");
     }
+    if (serverError === 200) {
+      setServerErrorMessage("Редактирование профиля прошло успешно!");
+    }
   }, [serverError]);
 
   useEffect(() => {
@@ -34,6 +37,12 @@ function Profile({
       name: values.name,
     });
   }, [values]);
+
+/*   useEffect(() => {
+    if (pathname !== '/profile') {
+      setServerErrorMessage("");
+    }
+  }, [pathname]); */
 
   useEffect(() => {
     if (

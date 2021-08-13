@@ -12,10 +12,7 @@ function MoviesCard({ pathname, card, handleMovieCardSave, handleMovieCardDelete
     } else {
       setCardSaved(false)
     }
-  },[savedMovieCards, movieCards, card]);
-
-/*   const isCardSaved = savedMovieCards.some(elem => elem.movieId === card.id);
-  console.log(savedMovieCards) */
+  },[savedMovieCards, card]);
 
   const handleClick = () => {
     if (isCardSaved) {
