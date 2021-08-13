@@ -16,6 +16,7 @@
 
 .profile__form {
   width: 100%;
+  min-height: 374px;
   display: flex;
   flex-direction: column;
 }
@@ -51,6 +52,24 @@
   text-align: right;
 }
 
+.profile__form-input-error {
+  display: block;
+  height: 12px;
+  color: #FF3055;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.profile__form-server-error {
+  display: block;
+  text-align: center;
+  height: 32px;
+  color: #FF3055;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 32px 0 0;
+}
+
 .profile__form-button-submit {
   background-color: initial;
   color: #000000;
@@ -58,9 +77,14 @@
   font-size: 13px;
   line-height: 16px;
   border: 0;
-  margin: 220px 0 16px;
+  margin: auto 0 16px;
   transition: all 0.3s;
   cursor: pointer;
+  justify-self: end;
+}
+
+.profile__form-button-submit_disabled {
+  color: #C2C2C2;
 }
 
 .profile__form-button-submit:hover {
@@ -98,6 +122,6 @@
   }
 
   .profile__form-button-submit {
-    margin: 380px 0 16px;
+    margin: auto 0 16px;
   }
 }

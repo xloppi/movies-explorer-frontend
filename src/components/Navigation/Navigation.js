@@ -1,8 +1,11 @@
 import './Navigation.css';
 import account from '../../images/account-icon.svg';
 import { Link, NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
-function Navigation({ pathname, isMenuOpen, setMenuOpen, loggedIn }) {
+function Navigation({ pathname, loggedIn }) {
+
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const buttonClick = () => {
     if (isMenuOpen) {
@@ -14,8 +17,7 @@ function Navigation({ pathname, isMenuOpen, setMenuOpen, loggedIn }) {
 
   return (
     <div className="navigation">
-      {/* Временное решение чтобы проверить как работают пути */}
-      {(loggedIn || pathname !== '/') ? (
+      {loggedIn ? (
         <>
           <button
             className={`navigation__burger-button`}
